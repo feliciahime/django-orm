@@ -1,22 +1,31 @@
 {% extends "base.html" %}
 
 {% block title %}
-    My Site - Home
+    Cats Next Door
 {% endblock title %}
 
 
 {% block content %}
 <div class="jumbotron">
-  <h1 class="display-4">My Site</h1>
-  <p class="lead">This is a simple Jumbotron component from Bootstrap 4.</p>
+  <h1 class="display-4">Cats Next Door</h1>
+  <p class="lead">The #1 website for finding your neighborhood feline.</p>
   <hr class="my-4">
-  <p>Edit this to include your content.</p>
+  <p>You know it's happened to you:</p>
+  <p>You're out and about, enjoying a lovely stroll,
+  when all of a sudden the stars seem to have aligned,
+  and you stumble upon a chance encounter with a 
+  sweet, friendly cat who just wants some pets, a 
+  belly rub, or to say hello.</p>
+  <p>So you introduce yourself, say hello, shake paws,
+   and eventually go about your business, but you 
+   can't stop wondering: how will I ever meet this 
+   sweet cat again - and what was that cat's name?</p>
   <p class="lead">
     <a class="btn btn-primary btn-lg" href="{% url 'about' %}" role="button">Learn more</a>
   </p>
 </div>
 
-<p>More stuff. {{ example_context_variable }}.</p>
+<p>Your #1 source for finding out all about your local cats. {{ example_context_variable }}.</p>
 
 {% endblock content %}
 

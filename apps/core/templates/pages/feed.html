@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block title %}Next Door Cats Feed{% endblock %}
+{% block nav_feed_class %}active{% endblock %}
+
+{% block content %}
+
+<h2>Free-range, local, organic.</h2>
+<h5>Here are some cool cats to check out...</h5>
+<br />
+<br />
+
+{% include "post_loop_snippet.html" %}
+
+
+<hr />
+
+
+<h2>Share a post</h2>
+<form class="" action="." method="POST">
+    <div class="card-body">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button class="btn btn-success btn-lg">Share!</button>
+    </div>
+</form>
+
+{% endblock content %}
+
+
+

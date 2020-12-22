@@ -7,6 +7,7 @@ from django.contrib.auth.decorators import login_required
 
 from apps.accounts.forms import UserEditForm, SignupForm
 from apps.accounts.models import User
+from .models import Post
 
 def log_in(request):
     if request.method == 'POST':
@@ -87,4 +88,14 @@ def edit_profile(request):
         'form': form,
     }
     return render(request, 'accounts/edit_profile.html', context)
+
+def view_feed(request):
+    if not request.user.is_authenticated:
+        messages.warning(request, "You need to log in to view the feed")
+        return redirect('/')
+
+    # context = {
+    #     'form': form,
+    # }
+    # return render(request, 'feed', context)
 
