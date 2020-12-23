@@ -9,10 +9,11 @@ from .models import CatPost
 class NewCatPost(forms.Form):
     catname = forms.CharField(max_length=120)
     neighborhood = forms.CharField(max_length=120)
-    text = forms.CharField(widget=forms.Textarea)
+    text = forms.CharField()
     image = forms.URLField(max_length=120)
-    sighted = forms.DateTimeField(widget=forms.SelectDateWidget)
-
+    sighted = forms.DateTimeField()
+#widget=forms.SelectDateWidget
+# widget=forms.Textarea
 
 def home(request):
 
@@ -49,7 +50,7 @@ def view_cats(request):
         'form': form,
     }
 
-    return render(request, 'pages/cats.html', context)
+    return render(request, 'cats.html', context)
 
 def add_a_cat(request):
     all_cats = CatPost.objects.all()
@@ -60,7 +61,7 @@ def add_a_cat(request):
         form = NewCatPost(request.POST)
         if form.is_valid():
             CatPost.objects.create(**form.cleaned_data)
-            return redirect('add-cat')
+            return redirect('/')
     else:
         form = NewCatPost()
 
@@ -69,5 +70,5 @@ def add_a_cat(request):
         'form': form,
     }
 
-    return render(request, 'add-cat', context)
+    return render(request, 'cats.html', context)
 
