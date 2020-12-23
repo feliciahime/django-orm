@@ -8,7 +8,6 @@ from django import forms
 
 from apps.accounts.forms import UserEditForm, SignupForm
 from apps.accounts.models import User
-from .models import CatPost
 
 def log_in(request):
     if request.method == 'POST':
@@ -25,13 +24,6 @@ def log_in(request):
         'form': form,
     }
     return render(request, 'accounts/login.html', context)
-
-class NewCatPost(forms.Form):
-    catname = forms.CharField(max_length=120)
-    neighborhood = forms.CharField(max_length=120)
-    text = forms.CharField(widget=forms.Textarea)
-    image = forms.URLField(max_length=120)
-    sighted = forms.DateTimeField(widget=forms.SelectDateWidget)
 
 def sign_up(request):
     if request.method == 'POST':
@@ -56,21 +48,6 @@ def logout_view(request):
     logout(request)
     messages.success(request, 'Logged out.')
     return redirect('home')
-
-def view_all_cats(request):
-    all_cat_posts = CatPost.objects.all()
-    context = {
-    }
-    return render(request, 'feed', context)
-
-
-# def view_all_users(request):
-#     all_users = User.objects.all()
-#     context = {
-#         'users': all_users,
-#     }
-#     return render(request, 'accounts/view_all_users.html', context)
-
 
 def view_profile(request, username):
     user = User.objects.get(username=username)
@@ -102,24 +79,10 @@ def edit_profile(request):
     }
     return render(request, 'accounts/edit_profile.html', context)
 
-def view_feed(request):
-    cat_pages = CatPost.objects.all()
-    if not request.user.is_authenticated:
-        messages.warning(request, "You need to log in to view the feed")
-        return redirect('/')
-    
-    if request.method == 'POST':
-        form = NewCatPost(request.POST)
-        if form.is_valid():
-            CatPost.objects.create(**form.cleaned_data)
-            return redirect('feed')
-
-    else:
-        form = NewCatPost()
-
-    context = {}
-    
-
-    return render(request, 'feed', context)
-
+def view_all_users(request):
+    all_users = User.objects.all()
+    context = {
+        'users': all_users,
+    }
+    return render(request, 'accounts/view_all_users.html', context)
 

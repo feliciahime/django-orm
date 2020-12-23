@@ -1,10 +1,22 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django import forms
+from .models import NewCatPost
+
 
 # Two example views. Change or delete as necessary.
+
+class NewCatPost(forms.Form):
+    catname = forms.CharField(max_length=120)
+    neighborhood = forms.CharField(max_length=120)
+    text = forms.CharField(widget=forms.Textarea)
+    image = forms.URLField(max_length=120)
+    sighted = forms.DateTimeField(widget=forms.SelectDateWidget)
+
+
 def home(request):
 
     context = {
-        'example_context_variable': 'Change me.',
+        'example_context_variable': '9 out of 10 cats approve',
     }
 
     return render(request, 'pages/home.html', context)
@@ -14,4 +26,51 @@ def about(request):
     }
 
     return render(request, 'pages/about.html', context)
+
+
+def view_cats(request):
+    all_cats = NewCatPost.objects.all()
+    if not request.user.is_authenticated:
+        messages.warning(request, "You need to log in to view the cats.")
+        return redirect('/')
+    
+    if request.method == 'POST':
+        form = NewCatPost(request.POST)
+        if form.is_valid():
+            CatPost.objects.create(**form.cleaned_data)
+            return redirect('pages/cats.html')
+
+    else:
+        form = NewCatPost()
+
+    context = {
+        'all_cats': all_cats,
+        'form': form,
+    }
+
+    return render(request, 'pages/cats.html', context)
+
+def add_a_cat(request):
+    # all_cats = CatPost.objects.all()
+    if request.method == 'POST':
+        form = NewCatPost(request.POST)
+        if form.is_valid():
+            CatPost.objects.create(**form.cleaned_data)
+            return redirect('pages/add-cat.html')
+    else:
+        form = NewCatPost()
+
+    context = {
+        # 'all_cats': all_cats,
+        'form': form,
+    }
+
+    return render(request, 'pages/add-cat.html', context)
+
+def view_cats(request):
+    all_cat_posts = NewCatPost.objects.all()
+    context = {
+    	'form': form,
+    }
+    return render(request, 'feed', context)
 
