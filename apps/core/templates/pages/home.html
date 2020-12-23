@@ -6,10 +6,13 @@
 
 
 {% block content %}
-<div class="jumbotron">
+<div  class="jumbotron">
   <h1 class="display-4">Cats Next Door</h1>
   <p class="lead">The #1 website for finding your neighborhood feline.</p>
-  <hr class="my-4">
+</div>
+<br />
+
+<div>
   <p>You know it's happened to you:</p>
   <p>You're out and about, enjoying a lovely stroll,
   when all of a sudden the stars seem to have aligned,
@@ -24,7 +27,6 @@
     <a class="btn btn-primary btn-lg" href="{% url 'about' %}" role="button">Learn more</a>
   </p>
 </div>
-
 <p>Your #1 source for finding out all about your local cats. {{ example_context_variable }}.</p>
 
 {% endblock content %}

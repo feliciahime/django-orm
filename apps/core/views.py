@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
+from django.contrib import messages
 from django import forms
-from .models import NewCatPost
+from .models import CatPost
 
 
 # Two example views. Change or delete as necessary.
@@ -29,7 +30,7 @@ def about(request):
 
 
 def view_cats(request):
-    all_cats = NewCatPost.objects.all()
+    all_cats = CatPost.objects.all()
     if not request.user.is_authenticated:
         messages.warning(request, "You need to log in to view the cats.")
         return redirect('/')
@@ -51,26 +52,22 @@ def view_cats(request):
     return render(request, 'pages/cats.html', context)
 
 def add_a_cat(request):
-    # all_cats = CatPost.objects.all()
+    all_cats = CatPost.objects.all()
+    if not request.user.is_authenticated:
+        messages.warning(request, "You need to log in to add a cat.")
+        return redirect('/')
     if request.method == 'POST':
         form = NewCatPost(request.POST)
         if form.is_valid():
             CatPost.objects.create(**form.cleaned_data)
-            return redirect('pages/add-cat.html')
+            return redirect('add-cat')
     else:
         form = NewCatPost()
 
     context = {
-        # 'all_cats': all_cats,
+        'all_cats': all_cats,
         'form': form,
     }
 
-    return render(request, 'pages/add-cat.html', context)
-
-def view_cats(request):
-    all_cat_posts = NewCatPost.objects.all()
-    context = {
-    	'form': form,
-    }
-    return render(request, 'feed', context)
+    return render(request, 'add-cat', context)
 
