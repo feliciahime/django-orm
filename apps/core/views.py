@@ -36,12 +36,6 @@ def view_cats(request):
         messages.warning(request, "You need to log in to view the cats.")
         return redirect('/')
     
-    if request.method == 'POST':
-        form = NewCatPost(request.POST)
-        if form.is_valid():
-            CatPost.objects.create(**form.cleaned_data)
-            return redirect('pages/cats.html')
-
     else:
         form = NewCatPost()
 
@@ -50,10 +44,9 @@ def view_cats(request):
         'form': form,
     }
 
-    return render(request, 'cats.html', context)
+    return render(request, 'pages/cats.html', context)
 
 def add_a_cat(request):
-    all_cats = CatPost.objects.all()
     if not request.user.is_authenticated:
         messages.warning(request, "You need to log in to add a cat.")
         return redirect('/')
@@ -61,14 +54,15 @@ def add_a_cat(request):
         form = NewCatPost(request.POST)
         if form.is_valid():
             CatPost.objects.create(**form.cleaned_data)
+            messages.warning(request, "Thanks for registering your feline friend!")
             return redirect('/')
+
     else:
         form = NewCatPost()
 
     context = {
-        'all_cats': all_cats,
         'form': form,
     }
 
-    return render(request, 'cats.html', context)
+    return render(request, 'pages/cats.html', context)
 
