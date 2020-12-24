@@ -49,7 +49,7 @@ def add_a_cat(request):
         return redirect('/')
     if request.method == 'POST':
         if form.is_valid():
-            CatPost.objects.create(**form.cleaned_data)
+            NewCatPost.objects.create(**form.cleaned_data)
             messages.warning(request, "Thanks for registering your feline friend!")
             return redirect('/')
 
