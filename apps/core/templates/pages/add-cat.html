@@ -1,16 +1,17 @@
 {% extends "base.html" %}
 
-{% block title %}Next Door Cats Feed{% endblock %}
+{% block title %}Next Door Cats: Add{% endblock %}
 {% block nav_feed_class %}active{% endblock %}
 
 {% block content %}
 
-<h2>Free-range, local, organic.</h2>
-<h5>Here are some cool cats to check out...</h5>
+<h2>Tell me more about your cat!</h2>
+<h5>I can't wait to hear the deets...</h5>
 <br />
 <br />
 
-<!-- {% include "form_snippet.html" %} -->
+
+{% include "form_snippet.html" %}
 
 
 <hr />
@@ -25,6 +26,7 @@
     </div>
 </form>
 
+<br />
 {% endblock content %}
 
 

@@ -5,21 +5,20 @@
 
 {% block content %}
 
-<h2>Free-range, local, organic.</h2>
-<h5>Here are some cool cats to check out...</h5>
+<h2>Here are some cool cats to check out:</h2>
+<h5>All local, free-range, organic.</h5>
 <br />
 <h3>Recent Cat Additions</h3>
+
 {% for catpost in catposts %}
     <hr />
     <h5><strong>Name:</strong> {{ CatPost.name }}</h5>
     	<h4><strong>Neighborhood:</strong> {{ CatPost.neighborhood }}</h4>
-<!--     <p><strong>:</strong> <pre>{{ registration.street_address }}</pre></p>
-    <p><strong>Email:</strong> {{ registration.email }}</p>
-    <p><strong>Visit Date:</strong> {{ registration.visit_date }}</p> -->
+
 {% endfor %}
 <br />
 
-{% include "pages/form_snippet.html" %}
+
 
 
 <hr />
