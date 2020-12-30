@@ -10,8 +10,8 @@ class NewCatPost(forms.Form):
     catname = forms.CharField(max_length=120)
     neighborhood = forms.CharField(max_length=120)
     text = forms.CharField()
-    image = forms.URLField(max_length=120)
-    sighted = forms.DateTimeField(widget=forms.SelectDateWidget)
+    image = forms.URLField()
+    sighted = forms.DateTimeField()
 
 def home(request):
 
@@ -43,13 +43,13 @@ def view_cats(request):
 
 
 def add_a_cat(request):
-    form = NewCatPost()
     if not request.user.is_authenticated:
         messages.warning(request, "You need to log in to add a cat.")
         return redirect('/')
     if request.method == 'POST':
+        form = NewCatPost(request.POST)
         if form.is_valid():
-            NewCatPost.objects.create(**form.cleaned_data)
+            CatPost.objects.create(**form.cleaned_data)
             messages.warning(request, "Thanks for registering your feline friend!")
             return redirect('/')
 

@@ -10,10 +10,12 @@
 <br />
 <h3>Recent Cat Additions</h3>
 
-{% for catpost in catposts %}
+{% for catpost in all_cats %}
     <hr />
-    <h5><strong>Name:</strong> {{ CatPost.name }}</h5>
-    	<h4><strong>Neighborhood:</strong> {{ CatPost.neighborhood }}</h4>
+    <h3><strong>Name:</strong> {{ catpost.catname }}</h5>
+    <h5><strong>Neighborhood:</strong> {{ catpost.neighborhood }}</h4>
+    <h5><strong>About:</strong> {{ catpost.text }}</h4>
+    <image src="{{ catpost.image }} " style="max-width:200px">
 
 {% endfor %}
 <br />
