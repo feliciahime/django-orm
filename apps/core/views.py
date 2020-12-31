@@ -62,3 +62,24 @@ def add_a_cat(request):
 
     return render(request, 'pages/add_a_cat.html', context)
 
+def view_cat_bio(request, cat_id):
+	catpost = CatPost.objects.get(id=cat_id)
+	print("Cat bio requested " + cat_id)
+
+	name = catpost.catname
+	hood = catpost.neighborhood
+	text = catpost.text
+	image = catpost.image
+	sighted = catpost.sighted
+	cat_id = catpost.id
+	print("cat name = " + name)
+
+	context = {
+	    'name': name,
+	    'hood': hood,
+	    'text': text,
+	    'image': image,
+	    'sighted': sighted,
+	    'cat_id': cat_id
+	}
+	return render(request, "pages/single_cat_post.html", context)

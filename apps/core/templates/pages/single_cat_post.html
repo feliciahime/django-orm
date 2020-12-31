@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block title %}Next Door Cats: View{% endblock %}
+{% block nav_feed_class %}active{% endblock %}
+
+{% block content %}
+
+<h2>This is one cool cat to check out: ID # {{ cat_id }}</h2>
+<h5>All local, free-range, organic.</h5>
+<br />
+
+    <hr />
+    <h3><strong>Name:</strong> {{ name }}</h5>
+    <h5><strong>Neighborhood:</strong> {{ hood }}</h4>
+    <h5><strong>About:</strong> {{ text }}</h4>
+    <image src="{{ image }} " style="max-width:400px">
+    <h5><strong>Last sighted:</strong> {{ sighted }}</h4>
+<br />
+
+
+
+
+<hr />
+
+
+{% endblock content %}
+
+
+
